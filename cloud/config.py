@@ -44,7 +44,7 @@ SCENE_PROMPTS_JSON = INPUT_DIR / "scene_prompts.json"
 # =====================================================
 
 # Image generation
-FLUX_MODEL = "black-forest-labs/FLUX.1-schnell"
+FLUX_MODEL = "black-forest-labs/FLUX.1-dev"
 
 # Image → Video
 COGVIDEO_MODEL = "THUDM/CogVideoX-5b-I2V"
