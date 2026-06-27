@@ -1,0 +1,29 @@
+{
+  "winter": {
+    "meaning": "isolation",
+    "camera": "wide shot",
+    "lighting": "cold blue",
+    "environment": "snowy empty field"
+  },
+
+  "river": {
+    "meaning": "passing time",
+    "camera": "drone shot",
+    "lighting": "golden hour",
+    "environment": "flowing river"
+  },
+
+  "rain": {
+    "meaning": "grief",
+    "camera": "slow tracking",
+    "lighting": "grey",
+    "environment": "empty rainy street"
+  },
+
+  "sunrise": {
+    "meaning": "hope",
+    "camera": "close up",
+    "lighting": "warm orange",
+    "environment": "sunrise landscape"
+  }
+}

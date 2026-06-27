@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+
+# Hugging Face cache
+.cache/
+huggingface/
+
+# Generated outputs
+outputs/
+app/outputs/
+cloud/output/
+
+# Videos and images
+*.mp4
+*.gif
+*.png
+*.jpg
+*.jpeg
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
