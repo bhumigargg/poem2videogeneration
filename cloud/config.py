@@ -61,20 +61,24 @@ DTYPE = torch.bfloat16 if DEVICE == "cuda" else torch.float32
 # IMAGE GENERATION
 # =====================================================
 
-IMAGE_WIDTH = 1024
+I# =====================================================
+# IMAGE GENERATION
+# =====================================================
 
+IMAGE_MODEL = "stabilityai/sdxl-turbo"
+
+IMAGE_WIDTH = 1024
 IMAGE_HEIGHT = 1024
 
-IMAGE_STEPS = 28
+# SDXL Turbo works best with very few steps
+IMAGE_STEPS = 4
 
-IMAGE_GUIDANCE = 3.5
+IMAGE_GUIDANCE = 0.0
 
 NEGATIVE_PROMPT = (
-    "blurry, watermark, logo, text, "
-    "low quality, cropped, deformed, "
-    "duplicate, bad anatomy"
+    "blurry, watermark, text, logo, low quality, "
+    "deformed, duplicate, cropped"
 )
-
 # =====================================================
 # VIDEO GENERATION
 # =====================================================

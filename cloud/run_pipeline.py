@@ -2,7 +2,7 @@
 Complete MetaCinema Cloud Pipeline
 """
 
-from flux_generator import FluxGenerator
+from sdxl_generator import SDXLGenerator
 
 from cogvideo_generator import CogVideoGenerator
 
@@ -17,9 +17,9 @@ def main():
 
     # ------------------------------------
 
-    flux = FluxGenerator()
+    sdxl = SDXLGenerator()
 
-    flux.generate_all()
+    sdxl.generate_all()
 
     # ------------------------------------
 
