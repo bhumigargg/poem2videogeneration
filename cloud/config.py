@@ -60,7 +60,7 @@ SCENE_PROMPTS_JSON = Path(matches[0])
 FLUX_MODEL = "black-forest-labs/FLUX.1-dev"
 
 # Image → Video
-COGVIDEO_MODEL = "THUDM/CogVideoX-5b-I2V"
+COGVIDEO_MODEL = "THUDM/CogVideoX-2b-I2V"
 
 # =====================================================
 # DEVICE
@@ -80,8 +80,8 @@ DTYPE = torch.bfloat16 if DEVICE == "cuda" else torch.float32
 
 IMAGE_MODEL = "stabilityai/sdxl-turbo"
 
-IMAGE_WIDTH = 768
-IMAGE_HEIGHT = 768
+IMAGE_WIDTH = 512
+IMAGE_HEIGHT = 512
 
 # SDXL Turbo works best with very few steps
 IMAGE_STEPS = 4
@@ -96,11 +96,11 @@ NEGATIVE_PROMPT = (
 # VIDEO GENERATION
 # =====================================================
 
-VIDEO_STEPS = 50
+VIDEO_STEPS = 20
 
 VIDEO_FPS = 8
 
-VIDEO_NUM_FRAMES = 49
+VIDEO_NUM_FRAMES = 16
 
 VIDEO_GUIDANCE = 6.0
 

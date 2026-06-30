@@ -42,7 +42,7 @@ class CogVideoGenerator:
         self.pipe.enable_sequential_cpu_offload()
         self.pipe.vae.enable_tiling()
         self.pipe.vae.enable_slicing()
-
+        self.pipe.enable_attention_slicing()
         print("✓ CogVideoX loaded.\n")
 
     def load_scene_prompts(self):
@@ -66,9 +66,7 @@ class CogVideoGenerator:
 
         image = load_image(str(image_path))
 
-        generator = torch.Generator(
-            device="cuda"
-        ).manual_seed(SEED)
+        generator=torch.Generator().manual_seed(SEED)
 
         frames = self.pipe(
 
