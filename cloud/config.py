@@ -67,8 +67,8 @@ DTYPE = torch.bfloat16 if DEVICE == "cuda" else torch.float32
 
 IMAGE_MODEL = "stabilityai/sdxl-turbo"
 
-IMAGE_WIDTH = 1024
-IMAGE_HEIGHT = 1024
+IMAGE_WIDTH = 768
+IMAGE_HEIGHT = 768
 
 # SDXL Turbo works best with very few steps
 IMAGE_STEPS = 4

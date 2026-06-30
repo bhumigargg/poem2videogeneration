@@ -1,5 +1,6 @@
 import json
 import torch
+import gc
 
 from diffusers import AutoPipelineForText2Image
 
@@ -29,8 +30,10 @@ class SDXLGenerator:
             variant="fp16"
         )
 
-        self.pipe.enable_model_cpu_offload()
-
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.pipe.to(device)
+        self.pipe.vae.enable_slicing()
+        self.pipe.vae.enable_tiling()
         print("✓ SDXL Turbo loaded.\n")
 
     def load_prompts(self):
@@ -100,7 +103,19 @@ class SDXLGenerator:
 
         return images
 
+    def unload(self):
 
+        print("\nUnloading SDXL...\n")
+
+        del self.pipe
+
+        gc.collect()
+
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+            torch.cuda.ipc_collect()
+
+        print("✓ SDXL unloaded.\n")
 if __name__ == "__main__":
 
     SDXLGenerator().generate_all()

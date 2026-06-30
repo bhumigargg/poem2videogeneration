@@ -6,7 +6,7 @@ Generates one video for every scene image.
 
 import json
 import torch
-
+import gc
 from diffusers import CogVideoXImageToVideoPipeline
 from diffusers.utils import (
     load_image,
@@ -39,7 +39,7 @@ class CogVideoGenerator:
         )
 
         # Memory optimizations
-        self.pipe.enable_model_cpu_offload()
+        self.pipe.enable_sequential_cpu_offload()
         self.pipe.vae.enable_tiling()
         self.pipe.vae.enable_slicing()
 
@@ -131,7 +131,19 @@ class CogVideoGenerator:
         print("==============================\n")
 
         return videos
+    def unload(self):
 
+        print("\nUnloading CogVideoX...\n")
+
+        del self.pipe
+
+        gc.collect()
+
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+            torch.cuda.ipc_collect()
+
+        print("✓ CogVideoX unloaded.\n")
 
 if __name__ == "__main__":
 
