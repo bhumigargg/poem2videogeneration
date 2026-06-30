@@ -32,17 +32,22 @@ class CogVideoGenerator:
     def __init__(self):
 
         print("\nLoading CogVideoX...\n")
-
         self.pipe = CogVideoXImageToVideoPipeline.from_pretrained(
             COGVIDEO_MODEL,
-            torch_dtype=DTYPE
+            torch_dtype=torch.float16,
+            low_cpu_mem_usage=True
         )
 
         # Memory optimizations
-        self.pipe.enable_sequential_cpu_offload()
-        self.pipe.vae.enable_tiling()
+        self.pipe.enable_model_cpu_offload()
+
         self.pipe.vae.enable_slicing()
-        self.pipe.enable_attention_slicing()
+        self.pipe.vae.enable_tiling()
+
+        try:
+            self.pipe.enable_xformers_memory_efficient_attention()
+        except Exception:
+            pass
         print("✓ CogVideoX loaded.\n")
 
     def load_scene_prompts(self):
@@ -65,7 +70,7 @@ class CogVideoGenerator:
         print(f"\nGenerating {scene_name}...")
 
         image = load_image(str(image_path))
-
+        image = image.resize((512, 512))
         generator=torch.Generator().manual_seed(SEED)
 
         frames = self.pipe(
@@ -87,7 +92,7 @@ class CogVideoGenerator:
             use_dynamic_cfg=True
 
         ).frames[0]
-
+        video_prompt = " ".join(video_prompt.split()[:80])
         output_path = VIDEO_DIR / f"{scene_name}.mp4"
 
         export_to_video(
@@ -95,11 +100,16 @@ class CogVideoGenerator:
             str(output_path),
             fps=VIDEO_FPS
         )
+        del frames
+        del image
 
+        gc.collect()
+
+        torch.cuda.empty_cache()
         print(f"✓ Saved -> {output_path}")
 
         return output_path
-
+        
     def generate_all(self):
 
         prompts = self.load_scene_prompts()

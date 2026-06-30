@@ -102,7 +102,7 @@ VIDEO_FPS = 8
 
 VIDEO_NUM_FRAMES = 16
 
-VIDEO_GUIDANCE = 6.0
+VIDEO_GUIDANCE = 4.0
 
 # =====================================================
 # RANDOMNESS
