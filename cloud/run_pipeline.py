@@ -1,8 +1,6 @@
 import gc
 import torch
-import shutil
-import os
-import glob
+
 from sdxl_generator import SDXLGenerator
 from cogvideo_generator import CogVideoGenerator
 from video_editor import VideoEditor
@@ -20,25 +18,7 @@ def clear_memory():
 
 
 def main():
-    # -----------------------------------------
-    # Find uploaded scene_prompts.json
-    # -----------------------------------------
 
-    os.makedirs("inputs", exist_ok=True)
-
-    matches = glob.glob("/kaggle/input/datasets/bhumigarg012/scene-prompts/scene_prompts.json", recursive=True)
-
-    if len(matches) == 0:
-        raise FileNotFoundError(
-            "scene_prompts.json not found in /kaggle/input"
-        )
-
-    source = matches[0]
-    destination = "inputs/scene_prompts.json"
-
-    shutil.copy(source, destination)
-
-    print(f"Copied:\n{source}\n->\n{destination}")
     print("\n==============================")
     print("MetaCinema Cloud Pipeline")
     print("==============================")

@@ -37,7 +37,20 @@ for folder in [
 # INPUT FILES
 # =====================================================
 
-SCENE_PROMPTS_JSON = INPUT_DIR / "scene_prompts.json"
+from pathlib import Path
+import glob
+
+matches = glob.glob(
+    "/kaggle/input/datasets/bhumigarg012/scene-prompts/scene_prompts.json",
+    recursive=True
+)
+
+if len(matches) == 0:
+    raise FileNotFoundError(
+        "scene_prompts.json not found in Kaggle Input."
+    )
+
+SCENE_PROMPTS_JSON = Path(matches[0])
 
 # =====================================================
 # MODELS
