@@ -60,7 +60,7 @@ SCENE_PROMPTS_JSON = Path(matches[0])
 FLUX_MODEL = "black-forest-labs/FLUX.1-dev"
 
 # Image → Video
-COGVIDEO_MODEL = "THUDM/CogVideoX-2b-I2V"
+COGVIDEO_MODEL = "THUDM/CogVideoX-5b-I2V"
 
 # =====================================================
 # DEVICE
